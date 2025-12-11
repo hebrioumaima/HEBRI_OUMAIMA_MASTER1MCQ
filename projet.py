@@ -31,13 +31,27 @@ print(filtered_df)
 print("**************moyenne de pourcentage GC%****************************\n")
 average_GC=df["Pourcentage GC"].mean()
 print(f"Pourcentage GC : {average_GC:.3f}")
+
 #5)Ajouter une nouvelle colonne avec categorie
 print("******************* Ajout d'une nouvelle colonne *********************\n")
 # Ajouter une nouvelle colonne "categorie pourcentage"
 df["Catégorie Pourcentage GC"] = df["Pourcentage GC"].apply(lambda x: "riche" if x > 55 else ("moyen" if 45 <= x <= 55 else "faible"))
+
 print(df)
 #6)ajouter une colonne de nombre de G de chaque sequence
 print("*********************** Nombre de G ****************************\n")
 df["Nombre de G"] = df["Séquence"].str.count('G')
 
 print(df, "\n")
+
+#7)calcule de l'ecart typede GC% et de la longueur
+print("********écart-type du %GC et de la longueur des séquences********\n")
+std_GC=df ['Pourcentage GC'].std()
+
+std_longueur=df ["Longueur"].std()
+
+print(f"Ecart type de %GC: {std_GC:.2f}")
+
+print(f"Ecart type de la longeur:{std_longueur:.2f}\n")
+#sauvegarder dataframe dans un fichier csv
+df.to_csv("tableau_sequence.csv",index=False)
